@@ -9,15 +9,34 @@ const WaitingList = () => {
   const [phone, setPhone] = useState("");
   const [userType, setUserType] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [errors, setErrors] = useState({ email: "", phone: "" });
 
   useEffect(() => {
     const validateForm = () => {
-      if (fullName && email && phone && userType) {
-        setIsButtonDisabled(false);
+      let emailValid = false;
+      let phoneValid = false;
+      let emailError = "";
+      let phoneError = "";
+
+      // Email validation regex
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        emailError = "Please enter a valid email address.";
       } else {
-        setIsButtonDisabled(true);
+        emailValid = true;
       }
+
+      // Phone number validation
+      if (!/^\d{10}$/.test(phone)) {
+        phoneError = "Please enter a valid 10-digit phone number.";
+      } else {
+        phoneValid = true;
+      }
+
+      setErrors({ email: emailError, phone: phoneError });
+      setIsButtonDisabled(!(fullName && emailValid && phoneValid && userType));
     };
+
     validateForm();
   }, [fullName, email, phone, userType]);
 
@@ -67,6 +86,13 @@ const WaitingList = () => {
     }
   };
 
+  const handlePhoneChange = (e) => {
+    const value = e.target.value;
+    if (/^\d*$/.test(value) && value.length <= 10) {
+      setPhone(value);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex justify-center items-center">
       <div className="bg-[#1a120e] p-8 rounded-lg w-full max-w-lg space-y-8">
@@ -110,6 +136,9 @@ const WaitingList = () => {
                 className="block w-full bg-[#1a120e] border border-[#52443d] rounded-md p-2.5"
                 required
               />
+               {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
             </div>
             <div>
               <label className="block text-sm font-medium mb-2" htmlFor="phone">
@@ -120,7 +149,7 @@ const WaitingList = () => {
                 name="phone"
                 type="tel"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={handlePhoneChange}
                 className="block w-full bg-[#1a120e] border border-[#52443d] rounded-md p-2.5"
                 required
               />

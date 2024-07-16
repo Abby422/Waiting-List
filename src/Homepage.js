@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./components/Button";
 import Section from "./components/Section";
 import OnboardingHeader from "./components/OnboardingHeader";
@@ -14,6 +14,34 @@ export default function Homepage() {
   const handleJoinWaitlist = () => {
     navigate("/waiting-list");
   };
+
+  const [activeCard, setActiveCard] = useState(0);
+
+  const cards = [
+    {
+      title: "Exclusive Access",
+      description:
+        "Be notified when BIVA launches and gain early access to the platform",
+    },
+    {
+      title: "Special Offers",
+      description:
+        "Enjoy launch discounts and exclusive benefits for early adopters.",
+    },
+    {
+      title: "Be a Trendsetter",
+      description:
+        "Help shape the beauty industry's future by providing valuable feedback.",
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveCard((prev) => (prev + 1) % cards.length);
+    }, 3000); 
+    return () => clearInterval(interval);
+  }, [cards.length]);
+
   return (
     <div className="flex flex-col">
       <OnboardingHeader logo={logo} />
@@ -34,9 +62,9 @@ export default function Homepage() {
             <Button
               text="Join the Biva Waitlist"
               className="bg-black w-fit text-white rounded px-2 py-1 md:w-fit md:px-4 md:py-2 "
-                onClick={() => {
-                    handleJoinWaitlist();
-                }}
+              onClick={() => {
+                handleJoinWaitlist();
+              }}
             />
           </div>
         </div>
@@ -95,7 +123,7 @@ export default function Homepage() {
       </section>
 
       <section className="bg-black py-8 md:py-12">
-        <div className="container mx-auto px-4 text-white  flex flex-col items-center justify-center">
+        <div className="container mx-auto px-4 text-white flex flex-col items-center justify-center">
           <div className="md:text-3xl text-red mb-8 text-left mx-16">
             BIVA is launching soon, and we want YOU to be a part of it!
           </div>
@@ -106,45 +134,32 @@ export default function Homepage() {
           <div className="text-base md:text-lg mb-8 text-center md:text-left">
             Here is what you get for joining the waitlist:
           </div>
-          <ul className="flex items-center space-x-4 mb-8">
-            <div className="p-4 border flex flex-col items-center w-1/3 border-gray-500 rounded bg-tertiary text-white">
-              <div className="flex items-center">
-                <p className="font-bold text-red">Exclusive Access</p>
-              </div>
-              <div className="mt-4">
-                Be notified when BIVA launches and gain early access to the
-                platform
-              </div>
+          <div className="relative w-full max-w-lg overflow-hidden h-48 mx-auto">
+            <div
+              className="absolute inset-0 flex transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(-${activeCard * 100}%)` }}
+            >
+              {cards.map((card, index) => (
+                <div
+                  key={index}
+                  className="w-full flex-shrink-0 p-4 border flex flex-col items-center border-gray-500 rounded bg-tertiary text-white"
+                >
+                  <div className="flex items-center">
+                    <p className="font-bold text-red">{card.title}</p>
+                  </div>
+                  <div className="mt-4">{card.description}</div>
+                </div>
+              ))}
             </div>
-            <div className="p-4 border flex flex-col items-center w-1/3 border-gray-500 rounded bg-tertiary text-white">
-              <div className="flex items-center">
-                <p className="font-bold text-red">Special Offers</p>
-              </div>
-              <div className="mt-4">
-                Enjoy launch discounts and exclusive benefits for early
-                adopters.
-              </div>
-            </div>
-            <div className="p-4 border flex flex-col items-center w-1/3 border-gray-500 rounded bg-tertiary text-white">
-              <div className="flex items-center">
-                <p className="font-bold text-red">Be a Trendsetter</p>
-              </div>
-              <div className="mt-4">
-                Help shape the beauty industry's future by providing valuable
-                feedback.
-              </div>
-            </div>
-          </ul>
-          <div className="flex flex-col items-center text-center md:text-left">
+          </div>
+          <div className="flex flex-col items-center text-center md:text-left mt-8">
             <span className="mb-4 font-semibold">
               Don't miss out! Secure your spot on the BIVA waitlist now!
             </span>
             <Button
               text="Join the Biva Waitlist"
               className="bg-red w-fit text-white rounded px-2 py-1 md:w-fit md:px-4 md:py-2"
-              onClick={() => {
-                handleJoinWaitlist();
-              }}
+              onClick={handleJoinWaitlist}
             />
           </div>
         </div>
