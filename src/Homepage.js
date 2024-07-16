@@ -5,7 +5,7 @@ import OnboardingHeader from "./components/OnboardingHeader";
 import logo from "./assets/logonew.svg";
 import image1 from "./assets/onboardingImge4.png";
 import image2 from "./assets/frame-6.svg";
-import image3 from "./assets/Frame 5.png";
+import image3 from "./assets/beautyImage1.jpg";
 import vector from "./assets/vector.svg";
 import { Link, useNavigate } from "react-router-dom";
 
