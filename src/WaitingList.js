@@ -66,7 +66,7 @@ const WaitingList = () => {
 
     try {
       const response = await fetch(
-        "https://globalbiva.co.ke/api/waiting-list/",
+        "https://api.globalbiva.co.ke/api/waiting-list/",
         requestOptions
       );
 
@@ -77,7 +77,7 @@ const WaitingList = () => {
       } else {
         console.error("Failed to join the waiting list:", result);
         alert(
-          `An error occurred: ${result.message || "Please try again later."}`
+          `An error occurred: ${result.email || "Please try again later."}`
         );
       }
     } catch (error) {
