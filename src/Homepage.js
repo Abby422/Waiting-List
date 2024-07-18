@@ -191,7 +191,7 @@ export default function Homepage() {
           <div className="flex-1">
             <h3 className="text-lg md:text-xl text-red mb-4">Contact</h3>
             <p>Email: biva@gmail.com</p>
-            <p>Phone: 0742345123</p>
+            <p>Phone: 0740354576</p>
           </div>
         </div>
       </footer>
