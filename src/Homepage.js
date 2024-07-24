@@ -170,27 +170,14 @@ export default function Homepage() {
           <div className="flex-1 mb-8 md:mb-0">
             <img src={logo} alt="Biva Logo" className="h-8 mb-4" />
             <p>
-              we are a beauty professional company that is aimed at connecting
+              We are a beauty professional company that is aimed at connecting
               stakeholders in the beauty industry
             </p>
           </div>
-          <div className="flex-1 mb-8 md:mb-0">
-            <h3 className="text-lg md:text-xl text-red mb-4">Quick Links</h3>
-            <ul>
-              <li className="mb-2">
-                <Link to="/">Home</Link>
-              </li>
-              <li className="mb-2">
-                <Link to="/">About Us</Link>
-              </li>
-              <li className="mb-2">
-                <Link to="/">Testimonials</Link>
-              </li>
-            </ul>
-          </div>
+          
           <div className="flex-1">
             <h3 className="text-lg md:text-xl text-red mb-4">Contact</h3>
-            <p>Email: biva@gmail.com</p>
+            <p>Email: globalbiva@gmail.com</p>
             <p>Phone: 0740354576</p>
           </div>
         </div>
