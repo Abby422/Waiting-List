@@ -7,7 +7,7 @@ import image1 from "./assets/onboardingImge4.png";
 import image2 from "./assets/frame-6.svg";
 import image3 from "./assets/beautyImage1.jpg";
 import vector from "./assets/vector.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Homepage() {
   const navigate = useNavigate();
